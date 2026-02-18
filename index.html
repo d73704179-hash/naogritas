@@ -14,26 +14,27 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: hidden;
         }
-        /* Vídeo fixado no lado esquerdo */
-        .video-section { 
+        /* Vídeo e Texto: Posicionados acima e à esquerda */
+        .video-group { 
             position: absolute;
-            left: 50px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 400px;
-            text-align: left;
+            left: 20px; 
+            top: 10%;  
+            width: 380px;
+            text-align: center; /* Centraliza o texto em relação ao vídeo */
         }
-        .video-section iframe {
+        .video-group iframe {
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid #444;
         }
-        .video-section p { 
+        .video-group p { 
             margin-top: 10px; 
             font-size: 1.1em;
             color: #ccc;
+            font-weight: bold;
         }
-        /* Container de captura CENTRALIZADO */
+        /* Container Central de Captura */
         .container { 
             border: 1px solid #333; 
             padding: 40px; 
@@ -42,6 +43,7 @@
             text-align: center;
             z-index: 10;
             width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
         input { 
             width: 100%; 
@@ -68,8 +70,8 @@
     </style>
 </head>
 <body>
-    <div class="video-section">
-        <iframe width="100%" height="225" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
+    <div class="video-group">
+        <iframe width="100%" height="215" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
         <p>Tutorial pra pc</p>
     </div>
 
